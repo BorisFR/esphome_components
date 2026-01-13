@@ -525,11 +525,11 @@ static esp_err_t panel_jd9365_invert_color(esp_lcd_panel_t *panel, bool invert_c
 
     ESP_RETURN_ON_FALSE(io, ESP_ERR_INVALID_STATE, TAG, "invalid panel IO");
 
-    //if (invert_color_data) {
+    if (invert_color_data) {
         command = LCD_CMD_INVON;
-    //} else {
-    //    command = LCD_CMD_INVOFF;
-    //}
+    } else {
+        command = LCD_CMD_INVOFF;
+    }
     ESP_RETURN_ON_ERROR(esp_lcd_panel_io_tx_param(io, command, NULL, 0), TAG, "send command failed");
 
     return ESP_OK;

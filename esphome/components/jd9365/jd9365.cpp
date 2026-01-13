@@ -34,7 +34,7 @@ void JD9365::setup() {
 
     ESP_ERROR_CHECK(esp_lcd_new_panel_io_dbi(mipi_dsi_bus, &dbi_config, &this->io_));
 
-    esp_lcd_dpi_panel_config_t dpi_config = JD9365_800_1280_PANEL_60HZ_DPI_CONFIG(LCD_COLOR_PIXEL_FORMAT_RGB565);
+    esp_lcd_dpi_panel_config_t dpi_config = JD9365_800_1280_PANEL_60HZ_DPI_CONFIG(LCD_COLOR_PIXEL_FORMAT_BGR565);// RGB565);
 
     jd9365_vendor_config_t vendor_config = {
         .mipi_config = {
@@ -44,7 +44,7 @@ void JD9365::setup() {
     };
     const esp_lcd_panel_dev_config_t panel_config = {
         .reset_gpio_num = this->reset_pin_->get_pin(),
-        .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_RGB,
+        .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_BGR; //RGB,
         .bits_per_pixel = 16,
         .vendor_config = &vendor_config,
     };
