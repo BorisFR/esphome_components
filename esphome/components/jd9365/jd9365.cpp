@@ -44,7 +44,7 @@ void JD9365::setup() {
     };
     const esp_lcd_panel_dev_config_t panel_config = {
         .reset_gpio_num = this->reset_pin_->get_pin(),
-        .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_BGR; //RGB,
+        .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_BGR, //RGB,
         .bits_per_pixel = 16,
         .vendor_config = &vendor_config,
     };
