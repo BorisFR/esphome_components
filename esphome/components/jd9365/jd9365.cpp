@@ -44,7 +44,7 @@ void JD9365::setup() {
     };
     const esp_lcd_panel_dev_config_t panel_config = {
         .reset_gpio_num = this->reset_pin_->get_pin(),
-        .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_BGR, //RGB,
+        .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_RGB,
         .bits_per_pixel = 16,
         .vendor_config = &vendor_config,
     };
@@ -90,7 +90,8 @@ void JD9365::draw_pixel_at(int x, int y, Color color) {
       y = this->height_ - y - 1;
       break;
   }
-  auto pixel = convert_big_endian(display::ColorUtil::color_to_565(color));
+  //auto pixel = convert_big_endian(display::ColorUtil::color_to_565(color));
+  auto pixel = convert_little_endian(display::ColorUtil::color_to_565(color));
 
   this->draw_pixels_at(x, y, 1, 1, (const uint8_t *) &pixel, display::COLOR_ORDER_RGB, display::COLOR_BITNESS_565, true, 0, 0, 0);
   esphome::App.feed_wdt();
