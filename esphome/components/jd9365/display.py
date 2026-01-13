@@ -7,6 +7,7 @@ from esphome.components.esp32 import const, only_on_variant
 from esphome.const import (
     CONF_ID,
     CONF_RESET_PIN,
+    CONF_INVERT_COLORS,
 )
 
 DEPENDECIES = ["esp_ldo"]
@@ -22,6 +23,7 @@ CONFIG_SCHEMA = cv.All(
             cv.GenerateID(): cv.declare_id(_cls),
             cv.Required(CONF_RESET_PIN): pins.internal_gpio_input_pin_schema,
             cv.Optional(CONF_BACKLIGHT): cv.use_id(switch.Switch),
+            cv.Optional(CONF_INVERT_COLORS): cv.boolean,
         })
     ),
     cv.only_with_esp_idf,
@@ -33,3 +35,5 @@ async def to_code(config):
     cg.add(var.set_reset_pin(await cg.gpio_pin_expression(config.get(CONF_RESET_PIN))))
     if CONF_BACKLIGHT in config:
         cg.add(var.set_backlight_switch(await cg.get_variable(config[CONF_BACKLIGHT])))
+    if CONF_INVERT_COLORS in config:
+        cg.add(var.invert_colors(config[CONF_INVERT_COLORS]))

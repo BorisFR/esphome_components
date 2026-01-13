@@ -39,11 +39,13 @@ class JD9365 : public display::Display {
 
         void set_reset_pin(InternalGPIOPin *pin) { this->reset_pin_ = pin; }
         void set_backlight_switch(esphome::switch_::Switch* backlight) { this->backlight_ = backlight; }
+        void invert_colors(bool invert) { this->invert_colors = invert; }
 
         bool notify_refresh_finish();
     protected:
         InternalGPIOPin *reset_pin_{};
         esphome::switch_::Switch* backlight_ = 0;
+        bool invert_colors = false;
 
         esp_lcd_panel_handle_t handle_{};
         esp_lcd_panel_io_handle_t io_{};
