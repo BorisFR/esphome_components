@@ -90,11 +90,11 @@ void JD9365::draw_pixel_at(int x, int y, Color color) {
       y = this->height_ - y - 1;
       break;
   }
-  //auto pixel = convert_big_endian(display::ColorUtil::color_to_565(color));
-  //this->draw_pixels_at(x, y, 1, 1, (const uint8_t *) &pixel, display::COLOR_ORDER_RGB, display::COLOR_BITNESS_565, true, 0, 0, 0);
+  auto pixel = convert_big_endian(display::ColorUtil::color_to_565(color));
+  this->draw_pixels_at(x, y, 1, 1, (const uint8_t *) &pixel, display::COLOR_ORDER_RGB, display::COLOR_BITNESS_565, true, 0, 0, 0);
 
-  auto pixel = convert_little_endian(display::ColorUtil::color_to_565(color));
-  this->draw_pixels_at(x, y, 1, 1, (const uint8_t *) &pixel, display::COLOR_ORDER_RGB, display::COLOR_BITNESS_565, false, 0, 0, 0);
+  //auto pixel = convert_little_endian(display::ColorUtil::color_to_565(color));
+  //this->draw_pixels_at(x, y, 1, 1, (const uint8_t *) &pixel, display::COLOR_ORDER_RGB, display::COLOR_BITNESS_565, false, 0, 0, 0);
 
   esphome::App.feed_wdt();
 }
